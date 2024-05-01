@@ -3,6 +3,10 @@
 @import './componnents/Navbar';
 @import './componnents/Menu';
 @import './componnents/Sidebar';
+@import './componnents/Info';
+@import './pages/Layout';
+@import './pages/Dashboard';
+@import './pages/Error';
 
 *{
     margin: 0;
@@ -17,4 +21,17 @@
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.bg--red{
+    background-color: #FF000066;
+}
+.bg--blue{
+    background-color: #4AB8FF66;
+}
+.bg--yellow{
+    background-color: #FDCC0C66;
+}
+.bg--pink{
+    background-color: #FD518166;
 }

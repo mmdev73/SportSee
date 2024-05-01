@@ -1,0 +1,26 @@
+.dashboard__container{ 
+    height: calc(100vh - 5.6875rem);
+    width: 100%;
+}
+
+.dashboard{
+    padding: 5rem 7.5rem;
+    &__title{
+        font-size: 3rem;
+        &__username{
+            color: $main-red;
+        }
+    }
+    &__subtitle{
+        margin-top: 1.875rem;
+    }
+    &__resume{
+        display: flex;
+        justify-content: space-between;
+        &__infos{
+            display: flex;
+            flex-flow: column;
+            gap: 1.5625rem;
+        }
+    }
+}
