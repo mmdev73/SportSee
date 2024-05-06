@@ -18,7 +18,7 @@ function App() {
           element: <Error />
         },
         {
-          path:'/user/:id',
+          path:'/user/:userIdParam',
           element: <Dashboard />
         },
       ]

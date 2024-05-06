@@ -2,8 +2,10 @@ import { useParams } from "react-router-dom";
 import axios from 'axios'
 import { useEffect, useState } from "react";
 import Info from "../componnents/Info";
+import PieCharts from "../componnents/PieCharts";
+import BarCharts from "../componnents/BarCharts";
 const Dashboard = () => {
-    let { id } = useParams();
+    let { userIdParam } = useParams();
     //const userInfosData = axios.get(`http://localhost:3000/user/${id}`)
     //.then(res => {
     //    return res.data.data
@@ -13,20 +15,26 @@ const Dashboard = () => {
     //})
 
     const [userInfos,setUserInfos] = useState({})
-    const [userId, setUserId] = useState(0)
     const [todayScore, setTodayScore] = useState(0)
-    const [keyData, setkeyData] = useState({})
+    const [keyData, setKeyData] = useState({})
+    const [activity, setActivity] = useState({})
      
 
     useEffect(() => {
         const fetchUserInfos = async () => {
-            const res = await axios.get(`http://localhost:3000/user/${id}`)
-            setUserId(res.data.data.id)
-            setUserInfos(res.data.data.userInfos)
-            setTodayScore(res.data.data.todayScore ? res.data.data.todayScore : res.data.data.score)
-            setkeyData(res.data.data.keyData)
+            const res = await axios.get(`http://localhost:3000/user/${userIdParam}`)
+            const {userInfos, todayScore, score, keyData} = res.data.data
+            setUserInfos(userInfos)
+            setTodayScore(todayScore ? todayScore : score)
+            setKeyData(keyData)
         }
         fetchUserInfos()
+        const fetchUserActivity = async () => {
+            const res = await axios.get(`http://localhost:3000/user/${userIdParam}/activity`)
+            const { sessions } = res.data.data
+            setActivity(sessions)
+        }
+        fetchUserActivity()
     },[])
 
     return (
@@ -42,7 +50,18 @@ const Dashboard = () => {
                     <h2 className="dashboard__subtitle">Félicitation ! Vous avez explosé vos objectifs hier</h2>
                     <div className="dashboard__resume">
                         <div className="dashboard__resume__charts">
-                            Charts here
+                            <div className="dashboard__resume__charts__large">
+                                <BarCharts datas={activity}/>
+                            </div>
+                            <div className="dashboard__resume__charts__small">
+                                <PieCharts datas={todayScore}/>
+                            </div>
+                            <div className="dashboard__resume__charts__small">
+                                <PieCharts datas={todayScore}/>
+                            </div>
+                            <div className="dashboard__resume__charts__small">
+                                <PieCharts datas={todayScore}/>
+                            </div>
                         </div>
                         <div className="dashboard__resume__infos">
                             <Info className="info__icon bg--red" icon={'energy'} iconAlt={'energy'} value={keyData.calorieCount ? keyData.calorieCount + 'kCal' : '0kCal'} unit={'Calories'}/>

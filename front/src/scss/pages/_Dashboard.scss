@@ -4,7 +4,8 @@
 }
 
 .dashboard{
-    padding: 5rem 7.5rem;
+    height: calc(100% - 10rem);
+    padding: 2rem 3.125rem;
     &__title{
         font-size: 3rem;
         &__username{
@@ -15,12 +16,77 @@
         margin-top: 1.875rem;
     }
     &__resume{
+        margin-top: 1.875rem;
         display: flex;
-        justify-content: space-between;
+        gap: 1.8rem;
         &__infos{
             display: flex;
             flex-flow: column;
             gap: 1.5625rem;
         }
+        &__charts{
+            width: 100%;
+            display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            &__small{
+                width: 16.125rem;
+                height: 16.4375rem;
+                background-color: $main-grey;
+                border-radius: 0.625rem;
+            }
+            &__large{
+                height: fit-content;
+                width: 100%;
+                background-color: $main-grey;
+                border-radius: 0.625rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 1.875rem;
+                & .recharts-wrapper{
+                    margin-top: 3.75rem;
+                }
+            }
+        }
     }
+}
+
+.barchart__legend{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1.875rem;
+    &__title{
+        font-size: 0.9375rem;
+        font-weight: 500;
+    }
+    &__container{
+        width: 40%;
+        display: flex;
+        justify-content:space-between;
+        &__data{
+            &__icon{
+                margin-right: 0.625rem;
+            }
+            &__text{
+                color: $second-grey;
+                font-size: 0.875rem;
+                font-weight: 500;                
+            }
+        }
+    }        
+}
+
+.barchart__customTooltip{
+    width: 50px;
+    background-color: $main-red;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.3125rem;
 }
