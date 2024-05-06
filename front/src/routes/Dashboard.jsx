@@ -4,20 +4,36 @@ import { useEffect, useState } from "react";
 import Info from "../componnents/Info";
 import PieCharts from "../componnents/PieCharts";
 import BarCharts from "../componnents/BarCharts";
+import SimpleLineCharts from "../componnents/SimpleLineCharts";
+import RadarCharts from "../componnents/RadarChart";
 const Dashboard = () => {
     let { userIdParam } = useParams();
-    //const userInfosData = axios.get(`http://localhost:3000/user/${id}`)
-    //.then(res => {
-    //    return res.data.data
-    //})
-    //.catch(err => {
-    //    console.log(err)
-    //})
+    
+    const getKindStr = (kind) => {
+        switch (kind){
+            case 1:
+                return "Cardio"
+            case 2:
+                return "Énergie"
+            case 3:
+                return "Endurance"
+            case 4:
+                return "Force"
+            case 5:
+                return "Vitesse"
+            case 6:
+                return "Intensité"
+            default:
+                return ""
+        }
+    }
 
     const [userInfos,setUserInfos] = useState({})
     const [todayScore, setTodayScore] = useState(0)
     const [keyData, setKeyData] = useState({})
     const [activity, setActivity] = useState({})
+    const [averageSession, setAverageSession] = useState({})
+    const [performance, setPerformance] = useState({})
      
 
     useEffect(() => {
@@ -35,6 +51,26 @@ const Dashboard = () => {
             setActivity(sessions)
         }
         fetchUserActivity()
+        const fetchAverageSessions = async () => {
+            const res = await axios.get(`http://localhost:3000/user/${userIdParam}/average-sessions`)
+            const { sessions } = res.data.data
+            setAverageSession(sessions)
+        }
+        fetchAverageSessions()
+        const fetchPerformance = async () => {
+            const res = await axios.get(`http://localhost:3000/user/${userIdParam}/performance`)
+            const { data } = res.data.data
+            const formatedData = []
+            for(let i = data.length - 1; i >= 0; i--){
+                const obj = {
+                    value: data[i].value,
+                    kind: getKindStr(data[i].kind)
+                }
+                formatedData.push(obj)
+            }
+            setPerformance(formatedData)
+        }
+        fetchPerformance()
     },[])
 
     return (
@@ -53,11 +89,11 @@ const Dashboard = () => {
                             <div className="dashboard__resume__charts__large">
                                 <BarCharts datas={activity}/>
                             </div>
-                            <div className="dashboard__resume__charts__small">
-                                <PieCharts datas={todayScore}/>
+                            <div className="dashboard__resume__charts__small dashboard__resume__charts__small--red">
+                                <SimpleLineCharts datas={averageSession} />
                             </div>
-                            <div className="dashboard__resume__charts__small">
-                                <PieCharts datas={todayScore}/>
+                            <div className="dashboard__resume__charts__small dashboard__resume__charts__small--black">
+                                <RadarCharts datas={performance}/>
                             </div>
                             <div className="dashboard__resume__charts__small">
                                 <PieCharts datas={todayScore}/>

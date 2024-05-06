@@ -1,10 +1,10 @@
 .dashboard__container{ 
-    height: calc(100vh - 5.6875rem);
+    min-height: calc(100vh - 5.6875rem);
     width: 100%;
 }
 
 .dashboard{
-    height: calc(100% - 10rem);
+    min-height: calc(100% - 10rem);
     padding: 2rem 3.125rem;
     &__title{
         font-size: 3rem;
@@ -19,10 +19,18 @@
         margin-top: 1.875rem;
         display: flex;
         gap: 1.8rem;
+        @media screen and (width < 1280px) {
+            flex-flow: column;
+        }
         &__infos{
             display: flex;
             flex-flow: column;
             gap: 1.5625rem;
+            @media screen and (width < 1280px) {
+                flex-flow: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
         }
         &__charts{
             width: 100%;
@@ -30,11 +38,23 @@
             flex-flow: row;
             flex-wrap: wrap;
             justify-content: space-between;
+            @media screen and (width < 1280px) {
+                flex-flow: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                gap: 1.875rem;
+            }
             &__small{
                 width: 16.125rem;
                 height: 16.4375rem;
                 background-color: $main-grey;
                 border-radius: 0.625rem;
+                &--red{
+                    background-color: #FF0000;
+                }
+                &--black{
+                    background-color: #282D30;
+                }
             }
             &__large{
                 height: fit-content;
@@ -89,4 +109,17 @@
     align-items: center;
     gap: 0.625rem;
     padding: 0.3125rem;
+}
+
+.line__tooltip{
+    &__payload{
+        width: 50px;
+        height: 30px;
+        font-size: 12px;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e6e6e6;
+    }    
 }
