@@ -8,32 +8,42 @@ export default function PieCharts({datas}) {
     ]
     const COLORS = ["#FF0000", "#FBFBFB"];
 
-    const customLabel = () => {
+    const CustomLabel = () => {
       return (
-        <p>
-          <span>{`${prct}%`}</span>
-          <span>de votre objectif</span>
-        </p>
+        <text className="PieContainer__item">
+          <tspan className="PieContainer__item__prct">{`${prct}%`}</tspan>
+          <tspan className="PieContainer__item__text">de votre objectif</tspan>
+        </text>
+      )
+    }
+    const CustomTitle = () => {
+      return (
+        <text className="PieContainer_title">
+          Score
+        </text>
       )
     }
 
     return (
-        <ResponsiveContainer width={258} height="100%">
-          <PieChart margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+      <>
+          <CustomTitle />
+        <ResponsiveContainer width={258} height="100%" className="PieContainer">
+          <CustomLabel/>
+          <PieChart margin={{ top: 10, right: 0, left: -10, bottom: 10 }} className="PieContainer_pieCharts">
             <Pie
               data={data}
               dataKey="value"
               cx={140}
               cy="50%"
               innerRadius={0}
-              outerRadius={80}
-              isAnimationActive={false}
+              outerRadius={81}
+              isAnimationActive={true}
             >
               {data.map((entry, index) => {
-                return <Cell key={`cell-${index}`} fill="#FFF" stroke="#FBFBFB" />;
+                return <Cell key={`cell-${index}`} fill="#FFF" stroke="#FFF" />;
               })}
-              <Label
-                value={`${prct}% de votre objectif`}
+              {/* <Label
+                value={`${prct}%\n de votre objectif`}
                 className="pieChartsLabel"
                 position="center"
                 fill="black"
@@ -42,7 +52,7 @@ export default function PieCharts({datas}) {
                   fontWeight: "normal",
                   fontFamily: "Roboto",
                 }}
-              />
+              /> */}
             </Pie>
             <Pie
             data={data}
@@ -51,8 +61,9 @@ export default function PieCharts({datas}) {
             startAngle={-180}
             endAngle={-580}
             innerRadius={65}
-            outerRadius={80}
+            outerRadius={81}
             dataKey="value"
+            isAnimationActive={true}
           >   
             {data.map((entry, index) => {
               if (index === 0) {
@@ -75,5 +86,6 @@ export default function PieCharts({datas}) {
             </Pie>
           </PieChart>
         </ResponsiveContainer>
-      );
+        </>
+      )
   }

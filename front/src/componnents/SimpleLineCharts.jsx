@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
 
 const SimpleLineCharts = ({datas}) => {
     const getDay = (day) => {
@@ -43,7 +43,34 @@ const SimpleLineCharts = ({datas}) => {
         }
         return null
     }
+const CustomCursor = (props) => {
+    const points = props.points[0]
+    const width = props.width
+    const height = props.height
+    const x = points.x
+    const y = points.y
     return (
+      <Rectangle
+        fill="#000000"
+        opacity={0.1}
+        x={x}
+        y={y - 10}
+        width={width}
+        height={height + 50}
+      />
+    )
+}
+
+    const CustomTitle = () => {
+        return (
+            <text className='LineCharts_Title'>
+                Durée moyenne des sessions
+            </text>
+        )
+    }
+    return (
+        <>
+        <CustomTitle />
         <ResponsiveContainer width="100%" height="100%">
             <LineChart
               width="100%"
@@ -63,7 +90,7 @@ const SimpleLineCharts = ({datas}) => {
                 axisLine={false}
               />
               <Tooltip 
-              cursor={false}
+              cursor={<CustomCursor/>}
               content={renderTooltip}
               />
               <Line
@@ -75,6 +102,7 @@ const SimpleLineCharts = ({datas}) => {
               />
             </LineChart>
         </ResponsiveContainer>
+        </>
     )
 }
 

@@ -44,12 +44,12 @@ const BarCharts = ({datas}) => {
       }
 
     return (
-            <BarChart width={800} height={250} data={formatedData}>
+            <BarChart height={228} width={800} data={formatedData} className="BarCharts_Container">
                 <CartesianGrid strokeDasharray="3 3"  strokeDashoffset={50}/>
                 <XAxis dataKey="name" />
                 <YAxis  orientation='right'/>
                 <Tooltip content={customTooltip}/>
-                <Legend wrapperStyle={{ top: -40, right: 0}} content={customLegend}/>
+                <Legend wrapperStyle={{ top: -40, right: 0}} width="100%" content={customLegend}/>
                 <Bar dataKey="kg" fill="#000" barSize={10} radius={10} b/>
                 <Bar dataKey="cal" fill="#E60000" barSize={10} radius={10}/>
             </BarChart> 

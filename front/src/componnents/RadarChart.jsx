@@ -1,4 +1,4 @@
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts'
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts'
 
 const RadarCharts = ({datas}) => {
     return (
@@ -6,7 +6,7 @@ const RadarCharts = ({datas}) => {
           <RadarChart cx="50%" cy="50%" outerRadius="80%" data={datas}>
             <PolarGrid />
             <PolarAngleAxis dataKey="kind"tick={{ fill: "white", fontSize: 10 }}/>
-            <Radar dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Radar dataKey="value" fill="#FF0000" fillOpacity={0.6} />
           </RadarChart>
         </ResponsiveContainer>
       )
