@@ -42,17 +42,6 @@ export default function PieCharts({datas}) {
               {data.map((entry, index) => {
                 return <Cell key={`cell-${index}`} fill="#FFF" stroke="#FFF" />;
               })}
-              {/* <Label
-                value={`${prct}%\n de votre objectif`}
-                className="pieChartsLabel"
-                position="center"
-                fill="black"
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "normal",
-                  fontFamily: "Roboto",
-                }}
-              /> */}
             </Pie>
             <Pie
             data={data}

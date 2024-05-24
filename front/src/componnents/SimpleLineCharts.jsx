@@ -60,7 +60,6 @@ const CustomCursor = (props) => {
                 tickLine={false}
                 axisLine={false}
               />
-              {/* <Wrapper dataKey="day" tick={{fill:"#FFF"}}/> */}
               <Tooltip 
               cursor={<CustomCursor/>}
               content={renderTooltip}
@@ -79,22 +78,3 @@ const CustomCursor = (props) => {
 }
 
 export default SimpleLineCharts
-
-//const Wrapper = ({ dataKey, tick, tickLine = false, axisLine = false }) => {
-//    const defaultValues = useMemo(
-//      () => ({ dataKey: getParamFromDom('dataKey'), tick: getParamFromDom('tick'), tickLine: getParamFromDom('tickLine'), axisLine: getParamFromDom('axisLine')}),
-//      []
-//    )
-//    return <XAxis 
-//    dataKey={dataKey || defaultValues.dataKey}
-//    tick={tick || defaultValues.tick}
-//    tickLine={tickLine || defaultValues.tickLine}
-//    axisLine={axisLine || defaultValues.axisLine}
-//  />
-//}
-
-//const error = console.error
-//console.error = (...args) => {
-//  if (/defaultProps/.test(args[0])) return
-//  error(...args)
-//}

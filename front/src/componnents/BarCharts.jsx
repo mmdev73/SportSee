@@ -48,8 +48,6 @@ const BarCharts = ({datas}) => {
                 <CartesianGrid strokeDasharray="3 3"  strokeDashoffset={50}/>
                 <XAxis dataKey="name" />
                 <YAxis  orientation='right'/>
-                {/* <Wrapper param1="name" context="x"/>
-                <Wrapper param1="right" context="y"/> */}
                 <Tooltip content={customTooltip}/>
                 <Legend wrapperStyle={{ top: -40, right: 0}} width="100%" content={customLegend}/>
                 <Bar dataKey="kg" fill="#000" barSize={10} radius={10} b/>
@@ -59,16 +57,3 @@ const BarCharts = ({datas}) => {
 }
 
 export default BarCharts
-
-// Faire un truc plus global pour compatibilité avec plusieurs Charts
-//const Wrapper = ({ context, param1 }) => {
-//    const defaultValues = useMemo(
-//      () => ({ param1: getParamFromDom('defParam1')}),
-//      []
-//    )
-//    if(context == "x"){
-//        return <XAxis dataKey={param1 || defaultValues.param1}/>
-//    }
-//    // return <RealComponent param1={param1 || defaultValues.param1} param2={param2 || defaultValues.param2 } />
-//    return <YAxis orientation={param1 || defaultValues.param1}/>
-//  }
