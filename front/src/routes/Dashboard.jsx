@@ -54,7 +54,36 @@ const Dashboard = () => {
         const fetchAverageSessions = async () => {
             const res = await axios.get(`http://localhost:3000/user/${userIdParam}/average-sessions`)
             const { sessions } = res.data.data
-            setAverageSession(sessions)
+            const getDay = (day) => {
+                switch (day){
+                    case 1:
+                        return "L"
+                    case 2:
+                        return "M"
+                    case 3:
+                        return "M"
+                    case 4:
+                        return "J"
+                    case 5:
+                        return "V"
+                    case 6:
+                        return "S"
+                    case 7:
+                        return "D"
+                    default:
+                        return"DEFAULT"
+                }
+            }
+            const formatedData = []
+            for(let i = 0; i < sessions.length; i++){
+                const obj = {
+                    dayOrigin: sessions[i].day,
+                    day: getDay(sessions[i].day),
+                    sessionLength: sessions[i].sessionLength
+                }
+                formatedData.push(obj)
+            }
+            setAverageSession(formatedData)
         }
         fetchAverageSessions()
         const fetchPerformance = async () => {

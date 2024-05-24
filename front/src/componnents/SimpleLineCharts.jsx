@@ -1,36 +1,7 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
 
 const SimpleLineCharts = ({datas}) => {
-    const getDay = (day) => {
-        switch (day){
-            case 1:
-                return "L"
-            case 2:
-                return "M"
-            case 3:
-                return "M"
-            case 4:
-                return "J"
-            case 5:
-                return "V"
-            case 6:
-                return "S"
-            case 7:
-                return "D"
-            default:
-                return"DEFAULT"
-        }
-    }
-    const formatedData = []
-    for(let i = 0; i < datas.length; i++){
-        const obj = {
-            dayOrigin: datas[i].day,
-            day: getDay(datas[i].day),
-            sessionLength: datas[i].sessionLength
-        }
-        formatedData.push(obj)
-    }
-
+    
     const renderTooltip = ({ payload, label, active }) => {
         if(active){
             return (
@@ -63,9 +34,9 @@ const CustomCursor = (props) => {
 
     const CustomTitle = () => {
         return (
-            <text className='LineCharts_Title'>
+            <h6 className='LineCharts_Title'>
                 Durée moyenne des sessions
-            </text>
+            </h6>
         )
     }
     return (
@@ -75,7 +46,7 @@ const CustomCursor = (props) => {
             <LineChart
               width="100%"
               height="100%"
-              data={formatedData}
+              data={datas}
               margin={{
                 top: 10,
                 right: 10,
@@ -89,6 +60,7 @@ const CustomCursor = (props) => {
                 tickLine={false}
                 axisLine={false}
               />
+              {/* <Wrapper dataKey="day" tick={{fill:"#FFF"}}/> */}
               <Tooltip 
               cursor={<CustomCursor/>}
               content={renderTooltip}
@@ -107,3 +79,22 @@ const CustomCursor = (props) => {
 }
 
 export default SimpleLineCharts
+
+//const Wrapper = ({ dataKey, tick, tickLine = false, axisLine = false }) => {
+//    const defaultValues = useMemo(
+//      () => ({ dataKey: getParamFromDom('dataKey'), tick: getParamFromDom('tick'), tickLine: getParamFromDom('tickLine'), axisLine: getParamFromDom('axisLine')}),
+//      []
+//    )
+//    return <XAxis 
+//    dataKey={dataKey || defaultValues.dataKey}
+//    tick={tick || defaultValues.tick}
+//    tickLine={tickLine || defaultValues.tickLine}
+//    axisLine={axisLine || defaultValues.axisLine}
+//  />
+//}
+
+//const error = console.error
+//console.error = (...args) => {
+//  if (/defaultProps/.test(args[0])) return
+//  error(...args)
+//}

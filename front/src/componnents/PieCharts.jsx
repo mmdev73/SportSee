@@ -10,17 +10,17 @@ export default function PieCharts({datas}) {
 
     const CustomLabel = () => {
       return (
-        <text className="PieContainer__item">
-          <tspan className="PieContainer__item__prct">{`${prct}%`}</tspan>
-          <tspan className="PieContainer__item__text">de votre objectif</tspan>
-        </text>
+        <p className="PieContainer__item">
+          <span className="PieContainer__item__prct">{`${prct}%`}</span>
+          <span className="PieContainer__item__text">de votre objectif</span>
+        </p>
       )
     }
     const CustomTitle = () => {
       return (
-        <text className="PieContainer_title">
+        <h6 className="PieContainer_title">
           Score
-        </text>
+        </h6>
       )
     }
 
