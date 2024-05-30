@@ -1,0 +1,18 @@
+.BarCharts_Container{
+    width: 850px!important;
+    @media screen and (width < 1385px) {
+        width: 750px!important;
+    }
+    @media screen and (width < 1265px) {
+        width: 850px!important;
+    }
+    @media screen and (width < 1085px) {
+        width: 750px!important;
+    }
+    @media screen and (width < 920px) {
+        width: 650px!important;
+    }
+    @media screen and (width < 790px) {
+        width: 550px!important;
+    }
+}

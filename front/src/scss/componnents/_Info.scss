@@ -1,0 +1,32 @@
+.info{
+    height: 124px;
+    width: calc(258px - 60px);
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $main-grey;
+    border-radius: 10px;
+    &__icon{
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }
+    &__data{
+        display: flex;
+        flex-flow: column;
+        align-items: flex-end;
+        &__value{
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        &__unit{
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: $second-grey;
+        }
+    }
+}
