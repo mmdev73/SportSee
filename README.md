@@ -2,6 +2,8 @@
 
 SportSee is a webapp created by OpenClassRoom. This is use at educationnal purpose only, so is not fully functionnal.
 
+If you want the complete application (back and front) in one clone use the branch main not master.
+
 ## Installation
 Create a folder :
 ```bash
@@ -19,7 +21,7 @@ git clone https://github.com/mmdev73/SportSee.git
 wget https://github.com/mmdev73/SportSee/archive/refs/heads/master.zip
 ```
 ## Usage
-### For backend
+### For backend (for master branch use only)
 Clone or download [this repository](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard) inside your NewFolder
 And follow their readMe instructions
 ### To launch frontend
