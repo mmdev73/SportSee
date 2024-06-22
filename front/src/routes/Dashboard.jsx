@@ -32,7 +32,49 @@ const Dashboard = () => {
                 return ""
         }
     }
+    const getDay = (day) => {
+        switch (day){
+            case 1:
+                return "L"
+            case 2:
+                return "M"
+            case 3:
+                return "M"
+            case 4:
+                return "J"
+            case 5:
+                return "V"
+            case 6:
+                return "S"
+            case 7:
+                return "D"
+            default:
+                return"DEFAULT"
+        }
+    }
 
+    const formatData = (data, type) => {
+        const formatedData = []
+        for(let i = data.length - 1; i >= 0; i--){
+            let obj = {}
+            if(type === "performance"){
+                obj = {
+                    value: data[i].value,
+                    kind: getKindStr(data[i].kind)
+                }                
+            }
+
+            if(type === "averageSessions"){
+                obj = {
+                    dayOrigin: data[i].day,
+                    day: getDay(data[i].day),
+                    sessionLength: data[i].sessionLength
+                }
+            }
+            formatedData.push(obj)
+        }
+        return formatedData
+    }
     const [userInfos,setUserInfos] = useState({})
     const [todayScore, setTodayScore] = useState(0)
     const [keyData, setKeyData] = useState({})
@@ -51,11 +93,8 @@ const Dashboard = () => {
             }
             const res = await axios.get(url)
             const {userInfos, todayScore, score, keyData} = res.data.data
-            setUserInfos(userInfos)
-            setTodayScore(todayScore ? todayScore : score)
-            setKeyData(keyData)
+            return {userInfos, todayScore, score, keyData}
         }
-        fetchUserInfos()
         const fetchUserActivity = async () => {
             let url = ''
             if(isOnline){
@@ -65,9 +104,8 @@ const Dashboard = () => {
             }
             const res = await axios.get(url)
             const { sessions } = res.data.data
-            setActivity(sessions)
+            return sessions
         }
-        fetchUserActivity()
         const fetchAverageSessions = async () => {
             let url = ''
             if(isOnline){
@@ -77,38 +115,8 @@ const Dashboard = () => {
             }
             const res = await axios.get(url)
             const { sessions } = res.data.data
-            const getDay = (day) => {
-                switch (day){
-                    case 1:
-                        return "L"
-                    case 2:
-                        return "M"
-                    case 3:
-                        return "M"
-                    case 4:
-                        return "J"
-                    case 5:
-                        return "V"
-                    case 6:
-                        return "S"
-                    case 7:
-                        return "D"
-                    default:
-                        return"DEFAULT"
-                }
-            }
-            const formatedData = []
-            for(let i = 0; i < sessions.length; i++){
-                const obj = {
-                    dayOrigin: sessions[i].day,
-                    day: getDay(sessions[i].day),
-                    sessionLength: sessions[i].sessionLength
-                }
-                formatedData.push(obj)
-            }
-            setAverageSession(formatedData)
+            return sessions
         }
-        fetchAverageSessions()
         const fetchPerformance = async () => {
             let url = ''
             if(isOnline){
@@ -118,17 +126,18 @@ const Dashboard = () => {
             }
             const res = await axios.get(url)
             const { data } = res.data.data
-            const formatedData = []
-            for(let i = data.length - 1; i >= 0; i--){
-                const obj = {
-                    value: data[i].value,
-                    kind: getKindStr(data[i].kind)
-                }
-                formatedData.push(obj)
-            }
-            setPerformance(formatedData) 
+            return data
         }
-        fetchPerformance()
+        Promise.all([fetchUserInfos(), fetchUserActivity(), fetchAverageSessions(), fetchPerformance()])
+            .then(([{userInfos, todayScore, score, keyData}, activity, averageSession, performance]) => {
+                setUserInfos(userInfos)
+                setTodayScore(todayScore ? todayScore : score)
+                setKeyData(keyData)
+                setActivity(activity)
+                setAverageSession(formatData(averageSession, "averageSessions"))
+                setPerformance(formatData(performance, "performance"))
+            })
+            .catch(error => console.log(error))
     },[])
 
     return (
