@@ -9,8 +9,13 @@ import RadarCharts from "../componnents/RadarChart";
 
 const API_ENV = 'https://apisportsee.dev73.fr/user/'
 const API_ENV_DEV = 'http://localhost:3000/user/'
-
+let URL = ''
 const isOnline = false
+if(isOnline){
+    URL = API_ENV_DEV
+} else {
+    URL = API_ENV_DEV
+}
 const Dashboard = () => {
     let { userIdParam } = useParams();
     
@@ -85,24 +90,12 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchUserInfos = async () => {
-            let url = ''
-            if(isOnline){
-                url = API_ENV + userIdParam
-            } else {
-                url = API_ENV_DEV + userIdParam
-            }
-            const res = await axios.get(url)
+            const res = await axios.get(URL+ userIdParam)
             const {userInfos, todayScore, score, keyData} = res.data.data
             return {userInfos, todayScore, score, keyData}
         }
         const fetchUserActivity = async () => {
-            let url = ''
-            if(isOnline){
-                url = API_ENV + userIdParam + '/activity'
-            } else {
-                url = API_ENV_DEV + userIdParam + '/activity'
-            }
-            const res = await axios.get(url)
+            const res = await axios.get(URL + userIdParam + '/activity')
             const { sessions } = res.data.data
             return sessions
         }
