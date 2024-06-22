@@ -6,6 +6,11 @@ import PieCharts from "../componnents/PieCharts";
 import BarCharts from "../componnents/BarCharts";
 import SimpleLineCharts from "../componnents/SimpleLineCharts";
 import RadarCharts from "../componnents/RadarChart";
+
+const API_ENV = 'https://apisportsee.dev73.fr/user/'
+const API_ENV_DEV = 'http://localhost:3000/user/'
+
+const isOnline = false
 const Dashboard = () => {
     let { userIdParam } = useParams();
     
@@ -38,7 +43,13 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchUserInfos = async () => {
-            const res = await axios.get(`http://localhost:3000/user/${userIdParam}`)
+            let url = ''
+            if(isOnline){
+                url = API_ENV + userIdParam
+            } else {
+                url = API_ENV_DEV + userIdParam
+            }
+            const res = await axios.get(url)
             const {userInfos, todayScore, score, keyData} = res.data.data
             setUserInfos(userInfos)
             setTodayScore(todayScore ? todayScore : score)
@@ -46,13 +57,25 @@ const Dashboard = () => {
         }
         fetchUserInfos()
         const fetchUserActivity = async () => {
-            const res = await axios.get(`http://localhost:3000/user/${userIdParam}/activity`)
+            let url = ''
+            if(isOnline){
+                url = API_ENV + userIdParam + '/activity'
+            } else {
+                url = API_ENV_DEV + userIdParam + '/activity'
+            }
+            const res = await axios.get(url)
             const { sessions } = res.data.data
             setActivity(sessions)
         }
         fetchUserActivity()
         const fetchAverageSessions = async () => {
-            const res = await axios.get(`http://localhost:3000/user/${userIdParam}/average-sessions`)
+            let url = ''
+            if(isOnline){
+                url = API_ENV + userIdParam + '/average-sessions'
+            } else {
+                url = API_ENV_DEV + userIdParam + '/average-sessions'
+            }
+            const res = await axios.get(url)
             const { sessions } = res.data.data
             const getDay = (day) => {
                 switch (day){
@@ -87,7 +110,13 @@ const Dashboard = () => {
         }
         fetchAverageSessions()
         const fetchPerformance = async () => {
-            const res = await axios.get(`http://localhost:3000/user/${userIdParam}/performance`)
+            let url = ''
+            if(isOnline){
+                url = API_ENV + userIdParam + '/performance'
+            } else {
+                url = API_ENV_DEV + userIdParam + '/performance'
+            }
+            const res = await axios.get(url)
             const { data } = res.data.data
             const formatedData = []
             for(let i = data.length - 1; i >= 0; i--){
@@ -97,7 +126,7 @@ const Dashboard = () => {
                 }
                 formatedData.push(obj)
             }
-            setPerformance(formatedData)
+            setPerformance(formatedData) 
         }
         fetchPerformance()
     },[])
