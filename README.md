@@ -17,7 +17,7 @@ Now, you have to clone (or download) the repository :
 # Clone
 git clone https://github.com/mmdev73/SportSee.git
 # OR download
-wget [https://github.com/mmdev73/SportSee/archive/refs/heads/main.zip](https://github.com/mmdev73/SportSee/archive/refs/heads/main.zip)
+wget https://github.com/mmdev73/SportSee/archive/refs/heads/main.zip
 ```
 ## Usage
 ### For backend (for master branch use only)
