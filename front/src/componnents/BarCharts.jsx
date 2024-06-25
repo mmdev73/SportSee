@@ -47,11 +47,12 @@ const BarCharts = ({datas}) => {
             <BarChart height={228} width={800} data={formatedData} className="BarCharts_Container">
                 <CartesianGrid strokeDasharray="3 3"  strokeDashoffset={50}/>
                 <XAxis dataKey="name" />
-                <YAxis  orientation='right'/>
+                <YAxis  yAxisId='right' orientation='right' dataKey="kg" domain={["dataMin - 10", "dataMax + 5"]}/>
+                <YAxis  yAxisId='left' orientation='left' dataKey="cal" domain={["dataMin - 50", "dataMax + 10"]} tick={false}/>
                 <Tooltip content={customTooltip}/>
                 <Legend wrapperStyle={{ top: -40, right: 0}} width="100%" content={customLegend}/>
-                <Bar dataKey="kg" fill="#000" barSize={10} radius={10} b/>
-                <Bar dataKey="cal" fill="#E60000" barSize={10} radius={10}/>
+                <Bar dataKey="kg" yAxisId='right' fill="#000" barSize={10} radius={10} />
+                <Bar dataKey="cal" yAxisId='left' fill="#E60000" barSize={10} radius={10}/>
             </BarChart> 
     )
 }
