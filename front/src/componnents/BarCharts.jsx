@@ -1,17 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 const BarCharts = ({datas}) => {
-    const formatedData = []
-    for(let i = 0; i < datas.length; i++){
-        const obj = {
-            name: i + 1,
-            kg: datas[i].kilogram,
-            cal: datas[i].calories,
-            d: datas[i].day
-        }
-        formatedData.push(obj)
-    }
-
     const customLegend = () => {
         return (
             <div className="barchart__legend">
@@ -44,7 +33,7 @@ const BarCharts = ({datas}) => {
       }
 
     return (
-            <BarChart height={228} width={800} data={formatedData} className="BarCharts_Container">
+            <BarChart height={228} width={800} data={datas} className="BarCharts_Container">
                 <CartesianGrid strokeDasharray="3 3"  strokeDashoffset={50}/>
                 <XAxis dataKey="name" />
                 <YAxis  yAxisId='right' orientation='right' dataKey="kg" domain={["dataMin - 10", "dataMax + 5"]}/>
