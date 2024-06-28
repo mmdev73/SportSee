@@ -22,7 +22,6 @@ const Dashboard = () => {
     const [error, setError] = useState(null)
 
     const fetchData = async (userIdParam) => {
-        //console.log(userIdParam)
         setIsLoading(true)
         try {
             const [{ userInfos, tdScore, keyData }, activity, averageSession, performance] = await Promise.all([
@@ -48,35 +47,10 @@ const Dashboard = () => {
         } finally {
             setIsLoading(false)
         }
-
-
-
-        // Promise.all([fetchUserInfos(userIdParam), fetchUserActivity(userIdParam), fetchAverageSessions(userIdParam), fetchPerformance(userIdParam)])
-        // .then(([{userInfos, tdScore, keyData}, activity, averageSession, performance]) => {
-        //     setUserInfos(userInfos)
-        //     setTodayScore(tdScore)
-        //     setKeyData(keyData)
-        //     setActivity(activity)
-        //     setAverageSession(averageSession)
-        //     setPerformance(performance)
-        // })
-        // .catch(error => {
-        //     console.log(error)
-        //     if(error){
-        //         const errNo = error.code === "ERR_NETWORK" ? 500 : error.response.status ? error.response.status : 404
-        //         setError({
-        //             status: errNo,
-        //             message: error.message
-        //         }) 
-        //     }
-        // })
     }
     useEffect(() => {
         fetchData(userIdParam)
     }, [])
-    //if(error !== null){
-    //    return <Error status={error.status} message={error.message} />
-    //}
     return (
         <>
 

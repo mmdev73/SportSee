@@ -12,8 +12,7 @@ export const fetchUserInfos = async (userIdParam) => {
 }
 export const fetchUserActivity = async (userIdParam) => {
     const res = await axios.get(apiUrl + userIdParam + '/activity')    
-    const { sessions } = res.data.data    
-    //return sessions
+    const { sessions } = res.data.data  
     const formatedData = formatData(sessions, "activities")
     return formatedData
 }
@@ -30,7 +29,6 @@ export const fetchPerformance = async (userIdParam) => {
     return formatedData
 }
 export const fetchData = async (userIdParam) => {
-    //console.log(userIdParam)
     Promise.all([fetchUserInfos(userIdParam), fetchUserActivity(userIdParam), fetchAverageSessions(userIdParam), fetchPerformance(userIdParam)])
     .then(([{userInfos, tdScore, keyData}, activity, averageSession, performance]) => {
         console.log(userInfos, tdScore, keyData, activity, averageSession, performance)
