@@ -28,11 +28,3 @@ export const fetchPerformance = async (userIdParam) => {
     const formatedData = formatData(data, "performance")
     return formatedData
 }
-export const fetchData = async (userIdParam) => {
-    Promise.all([fetchUserInfos(userIdParam), fetchUserActivity(userIdParam), fetchAverageSessions(userIdParam), fetchPerformance(userIdParam)])
-    .then(([{userInfos, tdScore, keyData}, activity, averageSession, performance]) => {
-        console.log(userInfos, tdScore, keyData, activity, averageSession, performance)
-        return {userInfos, tdScore, keyData, activity, averageSession, performance}
-    })
-    .catch(error => console.log(error))
-}
