@@ -38,6 +38,7 @@ const Dashboard = () => {
             setPerformance(performance)
         } catch (error) {
             if (error) {
+                console.log(error)
                 const errNo = error.code === "ERR_NETWORK" ? 500 : error.response.status ? error.response.status : 404
                 setError({
                     status: errNo,
