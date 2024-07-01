@@ -2,9 +2,9 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import Layout from './routes/Layout'
-import Dashboard from "./routes/Dashboard"
-import Error from "./routes/Error"
+import Layout from './pages/Layout'
+import Dashboard from "./pages/Dashboard"
+import Error from "./pages/Error"
 
 function App() {
   const router = createBrowserRouter([

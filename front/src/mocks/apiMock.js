@@ -7,10 +7,6 @@ import {
     USER_PERFORMANCE
 } from './datas'
 let mock;
-//console.log(USER_MAIN_DATA.filter(user => user.id === 12).shift())
-//console.log(USER_ACTIVITY.filter(userActivity => userActivity.userId === 12).shift())
-//console.log(USER_AVERAGE_SESSIONS.filter(userAverageSessions => userAverageSessions.userId === 12).shift())
-//console.log(USER_PERFORMANCE.filter(userPerformance => userPerformance.userId === 12).shift())
 
 if (import.meta.env.VITE_USE_MOCK_DATA === "true") {
     mock = new MockAdapter(axios)
